@@ -1,0 +1,87 @@
+***important noe keep in your mind that the values that will be inserted it's based on your variables name in the form****
+***important noe keep in your mind that the values that will be inserted it's based on your variables name in the form****
+-----------------------------------------------------
+staff list pages quireis :
+
+
+**to list all the users in the system (excluding the admins):
+
+SELECT StaffID , FName,LName,sEmail,PhoneNumber,Department,St_UserName,St_Password 
+FROM staff;
+
+**To add a new users: 
+**adding a manager (no need to be add to the manager table since he might not manage any employee) 
+**each empolyeed is added by an admin:
+
+INSERT INTO Staff(FName ,LName,sEmail,PhoneNumber,St_UserName,St_Password,Department,AdminID)
+VALUES ('Bobby','Wood','Bobby@gmail.com',01122254,'Bobby','manager1','software',(SELECT AdminID FROM Admin WHERE A_UserName = $_SESSION["USERNAME"]));
+
+
+
+**if you add a new employee you have to assign it to a manager :
+**first we do this query to add him into the staff table...
+
+INSERT INTO Staff(FName ,LName,sEmail,PhoneNumber,St_UserName,St_Password,Department,AdminID)
+VALUES ('Bobby','Wood','Bobby@gmail.com',01122254,'Bobby','manager1','software',(SELECT AdminID FROM Admin WHERE A_UserName = $_SESSION["USERNAME"]));
+
+**then we assign him to a manager ...
+
+INSERT INTO Manager(manager_ID,StaffID)
+VALUES ((SELECT StaffID FROM Staff WHERE St_UserName  = $managerUserNameVariable),(SELECT StaffID FROM Staff WHERE St_UserName = $emplyeeUserNameVariable));
+
+**first values is for the manager and the second one is for assignning the employee to the specified manager .
+
+------------------------------------------------
+**Form page:
+**to store a new application in the database:
+
+INSERT INTO leavingapplication(RequestTime,BeginingDate,EndingDate,leavingReason,StaffID)
+VALUES ('$variable','$variable','$variable','$variable',(SELECT StaffID FROM Staff  WHERE St_UserName = $_SESSION["USERNAME"]));
+
+-------------------------------------------------
+**employee main page :
+**to view all the application submitted by the employee :
+
+SELECT leavingapplication.leavingReason, leavingapplication.BeginingDate, leavingapplication.EndingDate, leavingapplication.RequestTime, 
+leavingapplication.applicationStatus FROM leavingapplication INNER JOIN staff ON staff.StaffID = leavingapplication.StaffID
+WHERE staff.St_UserName = $_SESSION["USERNAME"];
+
+-------------------------------------------------
+**manager main page :
+
+**to list all the application along with applicants'names sorted from oldest :
+
+SELECT CONCAT_WS(' ', staff.FName , staff.LName), leavingapplication.leavingReason, leavingapplication.RequestTime,leavingapplication.applicationStatus
+ FROM leavingapplication INNER JOIN staff ON staff.StaffID = leavingapplication.StaffID
+ ORDER BY leavingapplication.RequestTime DESC;
+
+
+**to list all the application along with applicants'names sorted from newest :
+
+SELECT leavingapplication.AppID , CONCAT_WS(' ', staff.FName , staff.LName), leavingapplication.leavingReason, leavingapplication.RequestTime,leavingapplication.applicationStatus
+ FROM leavingapplication INNER JOIN staff ON staff.StaffID = leavingapplication.StaffID
+ ORDER BY leavingapplication.RequestTime ASC;
+
+**to search for an employee my its name (first name and last name):
+
+SELECT leavingapplication.AppID  ,CONCAT_WS(' ', staff.FName , staff.LName), leavingapplication.leavingReason, leavingapplication.RequestTime,leavingapplication.applicationStatus
+ FROM leavingapplication INNER JOIN staff ON staff.StaffID = leavingapplication.StaffID
+ WHERE UPPER(CONCAT_WS(' ', staff.FName , staff.LName)) LIKE UPPER('%$variableName%');
+
+--------------
+for profile page :
+
+UPDATE staff
+	SET FName = $_SESSION["FIRSTNAME"],
+		LName= $_SESSION["LASTNAME"] ,
+  	sEmail =$_SESSION["EMAIL"] ,
+	PhoneNumber =$_SESSION["PHONENUMBER"] 
+WHERE St_UserName = $_SESSION["USERNAME"];
+-------------
+view leaving form page (for view details function ):
+
+SELECT  leavingapplication.leavingReason, leavingapplication.RequestTime, leavingapplication.BeginingDate,leavingapplication.EndingDate
+ FROM leavingapplication INNER JOIN staff ON staff.StaffID = leavingapplication.StaffID
+ WHERE leavingapplication.AppID = $variableName;
+
+** note try to create a vaiable that will be passed to the page which will include the application id of selected row

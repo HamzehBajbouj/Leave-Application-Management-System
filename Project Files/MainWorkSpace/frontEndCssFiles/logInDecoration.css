@@ -1,0 +1,37 @@
+body{
+    font-family:  Helvetica, sans-serif;
+    background-color: rgb(245, 245, 245);
+}
+h2{
+    text-align: center;
+}
+#box{
+ 
+    border: solid 3px rgb(231, 231, 231);
+    height: 220px;
+    width: 300px;
+    margin: auto;
+    margin-top: 10%;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgb(209, 209, 209);
+}
+
+ #box input{
+    width: 100%;
+    padding: 12px 0px;
+    margin: 8px 0px;
+    border: solid 1px lightgrey;
+}
+#box #subnitButton{
+    border : none;
+    width: 100%;
+    padding: 12px 0px;
+    margin: 10px 0px;
+    background-color: rgb(112, 216, 207);
+    color: white;
+}
+#box #subnitButton:active{
+    background-color: rgb(75, 163, 245);
+}

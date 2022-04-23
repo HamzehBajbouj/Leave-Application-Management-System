@@ -1,0 +1,144 @@
+body {
+    background-color: rgb(245,245,245);
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+.navbar {
+    width: 100%;
+    background-color: #555;
+    overflow: auto;
+  }
+  
+  .navbar a {
+    float: left;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .navbar a:hover {
+    background-color: #000;
+  }
+  
+  .active {
+    background-color: #04AA6D;
+  }
+  
+  @media screen and (max-width: 500px) {
+    .navbar a {
+      float: none;
+      display: block;
+    }
+  }
+/*
+.page-header
+{
+    width: 30%;
+ 
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    display: flex;
+    position: relative;
+    justify-content:flex-start;
+    padding-left: 20px;
+    
+    color: #403e3e;
+    font-family: myriad pro;
+    font-weight: bold;
+    font-size: 40px;
+   
+}
+*/
+ .profile-container {
+    width: 50%;
+    height: 700px;
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:#E7EBE0FF ;
+    border-radius: 20px;
+    display: flex;
+    position: relative;
+    justify-content:flex-start;
+    padding-left: 20px;
+}
+
+.profile p{
+    color: #403e3e;
+    font-family: helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 0px;
+   display: flex;
+   justify-content: center;
+   
+}
+
+.profile a{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    margin-left: 35%;
+ 
+}
+
+.profile form{
+    margin: 35px;
+    display: flexbox;
+
+
+}
+
+.input{
+ height:20px ;
+ width: 300px;
+margin-top: 20px;
+padding-left: 10px;
+padding-right: 10px;
+margin-left: 10%;
+border: 1px solid #777;
+border-radius: 14px;
+outline: none;
+}
+
+form label {
+display: flexbox;
+
+margin-left: 18%;
+}
+
+.update
+{
+    border : none;
+    width: 30%;
+    padding: 12px 0px;
+    margin: 40px 200px;
+    background-color:whitesmoke ;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+  
+
+}
+.update:hover{
+    background-color: #555;
+    color: whitesmoke;
+}
+
+footer{
+    height: 30px;
+    display: flex;
+    background-color: #555;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+    position: relative;
+}
